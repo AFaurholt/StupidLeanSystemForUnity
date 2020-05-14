@@ -19,6 +19,11 @@ public class LeanWithMouseBehaviour : MonoBehaviour
     [SerializeField] private Vector3 _upDirection = new Vector3(0f, 1f, 0f);
     [SerializeField] private KeyCode _conditionalKey = KeyCode.LeftShift;
 
+    //Lerping
+    [SerializeField] private float _lerpSpeed = 10f;
+    private bool _shouldSnapBack = false;
+
+
     //the current mouse input
     private Vector2 _mouseInputVec2 = Vector2.zero;
     private Vector3 _offsetY = Vector3.zero;
@@ -33,9 +38,9 @@ public class LeanWithMouseBehaviour : MonoBehaviour
         //We want to get input
         _mouseInputVec2 += GetRawMouseInputScaled(_conditionalKey);
         _mouseInputVec2 = ClampToMouseSpan(_mouseInputVec2);
-        SnapBackWhenConditionalKeyUp(_conditionalKey);
+        StartSnapBackOnKeyUp(_conditionalKey);
         ApplyLean();
-        Debug.Log(_transY.localPosition);
+        ApplySnapBack();
     }
 
     Vector2 GetRawMouseInputScaled(KeyCode conditionalKey = KeyCode.None)
@@ -45,6 +50,7 @@ public class LeanWithMouseBehaviour : MonoBehaviour
 
         if (conditionalKey == KeyCode.None || Input.GetKey(conditionalKey))
         {
+            _shouldSnapBack = false; //disable snapback while moving
             //record mouse input
             rawInput.x = Input.GetAxisRaw("Mouse X");
             if (_flipX)
@@ -67,11 +73,19 @@ public class LeanWithMouseBehaviour : MonoBehaviour
         return vector2;
     }
 
-    void SnapBackWhenConditionalKeyUp(KeyCode conditionalKey = KeyCode.None)
+    void StartSnapBackOnKeyUp(KeyCode conditionalKey = KeyCode.None)
     {
         if (conditionalKey != KeyCode.None && Input.GetKeyUp(conditionalKey))
         {
-            _mouseInputVec2 = Vector2.zero;
+            _shouldSnapBack = true;
+        }
+    }
+
+    void ApplySnapBack()
+    {
+        if (_shouldSnapBack)
+        {
+            _mouseInputVec2 = Vector2.MoveTowards(_mouseInputVec2, Vector2.zero, _lerpSpeed * Time.deltaTime);
         }
     }
 
