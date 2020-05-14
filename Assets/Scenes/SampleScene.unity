@@ -580,7 +580,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1097491478}
-  - component: {fileID: 1097491479}
   m_Layer: 0
   m_Name: Rig
   m_TagString: Untagged
@@ -604,26 +603,6 @@ Transform:
   m_Father: {fileID: 1145646088}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1097491479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1097491477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbd0192e800987846bcbe41ffbc67175, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _transX: {fileID: 1097491478}
-  _transY: {fileID: 587810962}
-  _leanBehaviourY: 1
-  _mouseSpan: {x: 1, y: 1}
-  _flipX: 1
-  _mouseSensitivity: {x: 1, y: 1}
-  _upDirection: {x: 0, y: 1, z: 0}
-  _conditionalKey: 304
 --- !u!1 &1145646087
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,6 +612,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1145646088}
+  - component: {fileID: 1145646089}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -655,3 +635,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1145646089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145646087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd0192e800987846bcbe41ffbc67175, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transX: {fileID: 1097491478}
+  _transY: {fileID: 587810962}
+  _leanBehaviourY: 1
+  _mouseSpan: {x: 10, y: 0.5}
+  _flipX: 1
+  _mouseSensitivity: {x: 1, y: 1}
+  _upDirection: {x: 0, y: 1, z: 0}
+  _conditionalKey: 304

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,6 +32,7 @@ public class LeanWithMouseBehaviour : MonoBehaviour
     {
         //We want to get input
         _mouseInputVec2 += GetRawMouseInputScaled(_conditionalKey);
+        _mouseInputVec2 = ClampToMouseSpan(_mouseInputVec2);
         SnapBackWhenConditionalKeyUp(_conditionalKey);
         ApplyLean();
         Debug.Log(_transY.localPosition);
@@ -55,6 +57,14 @@ public class LeanWithMouseBehaviour : MonoBehaviour
         }
 
         return rawInput;
+    }
+
+    Vector2 ClampToMouseSpan(Vector2 vector2)
+    {
+        vector2.x = Mathf.Clamp(vector2.x, -_mouseSpan.x, _mouseSpan.x);
+        vector2.y = Mathf.Clamp(vector2.y, -_mouseSpan.y, _mouseSpan.y);
+
+        return vector2;
     }
 
     void SnapBackWhenConditionalKeyUp(KeyCode conditionalKey = KeyCode.None)
